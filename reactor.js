@@ -4,7 +4,6 @@ var http = require("http"),
 
 
 client.on("ready", function () {
-  client.del('1429844494791');
   client.keys('*', function (err, reply) {
     reply.forEach(function (key) {
       client.get(key, function (err, reply) {
@@ -44,7 +43,7 @@ function finish (data, key) {
 
 function createCb (key, json) {
   var data = JSON.parse(json);
-  var time = calculateTime(data.datetime);
+  var time = calculateTime(new Date(data.datetime));
   var done = finish.bind(undefined, data, key);
   if (time > 0) {
     setTimeout(done, time);
@@ -57,5 +56,5 @@ function now () {
 }
 
 function calculateTime (time) {
-  return (parseInt(time) - now());
+  return (time.getTime() - now());
 }
