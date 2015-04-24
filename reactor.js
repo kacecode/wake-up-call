@@ -36,9 +36,16 @@ console.log("Now hosting...");
 
 function finish (data, key) {
   delete(data.datetime);
-  http.request(data, function () {
+  var req = http.request(data, function () {
     client.del(key);
-  }).end();
+  });
+  req.on('error', function (error) {
+    console.log('this is why we can\'t have nice things.');
+    console.log(data);
+    client.del(key);
+    console.log(error);
+  })
+  req.end();
 }
 
 function createCb (key, json) {
