@@ -2,8 +2,8 @@ var http = require("http"),
     redis = require("redis");
 
 var PORT = process.env.WAKEUPCALL_PORT || 9000,
-    REDIS_PORT = process.env.REDIS_PORT || 6379,
-    REDIS_HOST = process.env.REDIS_HOST || '127.0.0.1',
+    REDIS_PORT = process.env.WUC_REDIS_PORT || 6379,
+    REDIS_HOST = process.env.WUC_REDIS_HOST || '127.0.0.1',
     client = redis.createClient(REDIS_PORT, REDIS_HOST, {});
 
 client.on("error", function (err) {
