@@ -1,7 +1,16 @@
 var http = require("http"),
-    redis = require("redis"),
-    client = redis.createClient(6379, 'redis_1', {});
+    redis = require("redis");
 
+var PORT = process.env.WAKEUPCALL_PORT || 9000,
+    REDIS_PORT = process.env.REDIS_PORT || 6379,
+    REDIS_HOST = process.env.REDIS_HOST || '127.0.0.1',
+    client = redis.createClient(REDIS_PORT, REDIS_HOST, {});
+
+client.on("error", function (err) {
+  console.error("Unable to connect to redis");
+  console.error(err);
+  process.exit(1);
+});
 
 client.on("ready", function () {
   client.keys('*', function (err, reply) {
@@ -30,7 +39,7 @@ var server = http.createServer(function (request, response) {
     response.writeHead(201);
     response.end();
   });
-}).listen("9000");
+}).listen(PORT);
 
 console.log("Now hosting...");
 
