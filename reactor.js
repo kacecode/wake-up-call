@@ -20,10 +20,10 @@ client.on("ready", function () {
           return;
         }
         createCb(key, reply);
-      })
-    })
+      });
+    });
   });
-})
+});
 
 
 var server = http.createServer(function (request, response) {
@@ -41,7 +41,7 @@ var server = http.createServer(function (request, response) {
   });
 }).listen(PORT);
 
-console.log("Now hosting...");
+console.log("Now hosting on 0.0.0.0:" + PORT + "...");
 
 function finish (data, key) {
   delete(data.datetime);
@@ -53,7 +53,7 @@ function finish (data, key) {
     console.log(data);
     client.del(key);
     console.log(error);
-  })
+  });
   req.end();
 }
 
@@ -64,7 +64,9 @@ function createCb (key, json) {
   if (time > 0) {
     setTimeout(done, time);
   }
-  else (done())
+  else {
+    done();
+  }
 }
 
 function now () {
