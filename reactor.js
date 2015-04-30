@@ -58,11 +58,12 @@ console.log("Now hosting on 0.0.0.0:" + PORT + "...");
 
 function finish (data, key) {
   delete(data.datetime);
-  var req = request.get(data.host + ':' + data.port + data.path, function (err) {
+  console.log(data.host + ':' + data.port + data.path)
+  var req = request.get('https://' + data.host + ':' + data.port + data.path, function (err) {
     if (err) {
       console.log('This is why we can\'t have nice things.');
       console.log(data);
-      console.log(error);
+      console.log(err);
     }
     client.del(key);
   });
