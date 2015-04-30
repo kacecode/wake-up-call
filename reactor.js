@@ -33,9 +33,21 @@ var server = http.createServer(function (request, response) {
   });
 
   request.on('end', function () {
+    if (!body) {
+      response.writeHead(400, {'Content-Type': 'text/plain'})
+      response.end('No body\n');
+      return
+    }
     var key = now();
     client.set(key, body);
-    createCb(key, body);
+    try {
+      createCb(key, body);
+    } catch (e) {
+      console.log(e);
+      response.writeHead(400, {'Content-Type': 'text/plain'})
+      response.end("Bad JSON\n");
+      return;
+    }
     response.writeHead(201);
     response.end();
   });
@@ -49,7 +61,7 @@ function finish (data, key) {
     client.del(key);
   });
   req.on('error', function (error) {
-    console.log('this is why we can\'t have nice things.');
+    console.log('This is why we can\'t have nice things.');
     console.log(data);
     client.del(key);
     console.log(error);
@@ -58,6 +70,12 @@ function finish (data, key) {
 }
 
 function createCb (key, json) {
+  if (!json) {
+    console.log("ERROR")
+    console.log("Created at ", key);
+    console.log("JSON", json)
+    return
+  }
   var data = JSON.parse(json);
   var time = calculateTime(new Date(data.datetime));
   var done = finish.bind(undefined, data, key);
