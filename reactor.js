@@ -58,16 +58,14 @@ console.log("Now hosting on 0.0.0.0:" + PORT + "...");
 
 function finish (data, key) {
   delete(data.datetime);
-  var req = request.get(data.host + ':' + data.port + data.path, function () {
+  var req = request.get(data.host + ':' + data.port + data.path, function (err) {
+    if (err) {
+      console.log('This is why we can\'t have nice things.');
+      console.log(data);
+      console.log(error);
+    }
     client.del(key);
   });
-  req.on('error', function (error) {
-    console.log('This is why we can\'t have nice things.');
-    console.log(data);
-    client.del(key);
-    console.log(error);
-  });
-  req.end();
 }
 
 function createCb (key, json) {
