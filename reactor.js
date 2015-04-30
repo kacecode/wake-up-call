@@ -58,7 +58,6 @@ console.log("Now hosting on 0.0.0.0:" + PORT + "...");
 
 function finish (data, key) {
   delete(data.datetime);
-  meth = data.method.toLowerCase()
   var req = request.get(data.host + ':' + data.port + data.path, function () {
     client.del(key);
   });
