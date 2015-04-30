@@ -2,7 +2,7 @@ var http = require("http"),
     request = require('request'),
     redis = require("redis");
 
-var PORT = process.env.WAKEUPCALL_PORT || 9000,
+var PORT = process.env.WUC_PORT || 9000,
     REDIS_PORT = process.env.WUC_REDIS_PORT || 6379,
     REDIS_HOST = process.env.WUC_REDIS_HOST || '127.0.0.1',
     client = redis.createClient(REDIS_PORT, REDIS_HOST, {});
