@@ -1,4 +1,5 @@
 var http = require("http"),
+    request = require('request'),
     redis = require("redis");
 
 var PORT = process.env.WAKEUPCALL_PORT || 9000,
@@ -57,7 +58,8 @@ console.log("Now hosting on 0.0.0.0:" + PORT + "...");
 
 function finish (data, key) {
   delete(data.datetime);
-  var req = http.request(data, function () {
+  meth = data.method.toLowerCase()
+  var req = request.get(data.host + ':' data.port + data.path, function () {
     client.del(key);
   });
   req.on('error', function (error) {

@@ -4,7 +4,8 @@
   "description": "## A tool to asynchronusly delay tasks to a point in the future you specify. ##",
   "main": "reactor.js",
   "dependencies": {
-    "redis": "^0.12.1"
+    "redis": "^0.12.1",
+    "request": "^2.55.0"
   },
   "devDependencies": {},
   "scripts": {
