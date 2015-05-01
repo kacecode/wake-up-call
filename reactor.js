@@ -58,8 +58,8 @@ console.log("Now hosting on 0.0.0.0:" + PORT + "...");
 
 function finish (data, key) {
   delete(data.datetime);
-  console.log(data.host + ':' + data.port + data.path)
-  var req = request.get(data.full_path, function (err) {
+  console.log(data.full_path)
+  var req = request(data.full_path, function (err) {
     if (err) {
       console.log('This is why we can\'t have nice things.');
       console.log(data);
