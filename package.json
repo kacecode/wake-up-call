@@ -2,7 +2,7 @@
   "name": "wake-up-call",
   "version": "1.0.0",
   "description": "## A tool to asynchronously delay tasks to a point in the future you specify. ##",
-  "main": "reactor.js",
+  "main": "wake-up-call.js",
   "dependencies": {
     "redis": "^0.12.1",
     "request": "^2.55.0"
@@ -10,10 +10,11 @@
   "devDependencies": {},
   "files": [
     "scripts",
-    "utils"
+    "utils",
+    "wake-up-call.js"
   ],
   "scripts": {
-    "install": "./utils/upstart/ubuntu_setup.sh",
+    "install-daemon": "./scripts/ubuntu_setup.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,6 +24,6 @@
   "author": "Kacey Cole",
   "license": "ISC",
   "bin": {
-    "wake-up-call": "wake-up-call"
+    "wake-up-call": "./scripts/wake-up-call"
   }
 }
