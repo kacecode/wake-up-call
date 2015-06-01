@@ -1,14 +1,19 @@
 {
   "name": "wake-up-call",
   "version": "1.0.0",
-  "description": "## A tool to asynchronusly delay tasks to a point in the future you specify. ##",
+  "description": "## A tool to asynchronously delay tasks to a point in the future you specify. ##",
   "main": "reactor.js",
   "dependencies": {
     "redis": "^0.12.1",
     "request": "^2.55.0"
   },
   "devDependencies": {},
+  "files": [
+    "scripts",
+    "utils"
+  ],
   "scripts": {
+    "install": "./utils/upstart/ubuntu_setup.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +21,8 @@
     "url": "git@dev.izeni.net:kcole/wake-up-call.git"
   },
   "author": "Kacey Cole",
-  "license": "ISC"
+  "license": "ISC",
+  "bin": {
+    "wake-up-call": "wake-up-call"
+  }
 }
