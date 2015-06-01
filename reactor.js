@@ -37,9 +37,9 @@ var server = http.createServer(function (request, response) {
 
   request.on('end', function () {
     if (!body) {
-      response.writeHead(400, {'Content-Type': 'text/plain'})
+      response.writeHead(400, {'Content-Type': 'text/plain'});
       response.end('No body\n');
-      return
+      return;
     }
     var key = now();
     client.set(key, body);
@@ -47,7 +47,7 @@ var server = http.createServer(function (request, response) {
       createCb(key, body);
     } catch (e) {
       console.log(e);
-      response.writeHead(400, {'Content-Type': 'text/plain'})
+      response.writeHead(400, {'Content-Type': 'text/plain'});
       response.end("Bad JSON\n");
       return;
     }
@@ -60,7 +60,7 @@ console.log("Now hosting on 0.0.0.0:" + PORT + "...");
 
 function finish (data, key) {
   delete(data.datetime);
-  console.log(data.full_path)
+  console.log(data.full_path);
   var req = request(data.full_path, function (err) {
     if (err) {
       console.log('This is why we can\'t have nice things.');
@@ -73,10 +73,10 @@ function finish (data, key) {
 
 function createCb (key, json) {
   if (!json) {
-    console.log("ERROR")
+    console.log("ERROR");
     console.log("Created at ", key);
-    console.log("JSON", json)
-    return
+    console.log("JSON", json);
+    return;
   }
   var data = JSON.parse(json);
   var time = calculateTime(new Date(data.datetime));
