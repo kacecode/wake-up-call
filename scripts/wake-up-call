@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+
+var wakeupcall = require('wake-up-call');
+
+wakeupcall.init();
