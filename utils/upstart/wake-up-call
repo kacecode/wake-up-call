@@ -1,3 +1,0 @@
-#!/bin/bash
-
-nodejs /opt/wake-up-call/reactor.js
